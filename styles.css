@@ -1,0 +1,19 @@
+body {
+    background: linear-gradient(45deg, #e6e6e6, #028ac5);
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    
+}
+
+h1 {
+    font-size: 3em;
+    font-weight: 600;
+    background-image: linear-gradient(to left, #556268, #184887);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    font-family: 'Comforter', cursive;
+    font-family: 'Titillium Web', sans-serif;
+}
+
