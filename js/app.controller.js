@@ -10,7 +10,9 @@ window.onSearch = onSearch
 
 function onSearch(ev) {
     ev.preventDefault()
-    console.log('Hi');
+    const elInputSearch = document.querySelector('input[name=search]').value
+    console.log(elInputSearch);
+    locService.getPlaceLoc(elInputSearch)
 }
 
 function onInit() {
