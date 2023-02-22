@@ -16,14 +16,14 @@
 
 <body>
     <h1>TravelTip By Amit & Vladi</h1>
-    <section class="container">
-        <form class="" onsubmit="onSearch(event)">
-            <input type="search" name="search" placeholder="Search a place...">
-            <button type="button" class="btn btn-outline-dark">GO</button>
-        </form>
-        <button onclick="onGetLocs()" class="btn btn-outline-dark">Get Locations</button>
-        <button type="button" onclick="onGetUserPos()" class="btn btn-outline-dark">Go to my location</button>
-        <div id="map" style="width: 100%; height: 400px;"></div>
+    <form onsubmit="onSearch(event)">
+        <input type="search" name="search" placeholder="Search a place...">
+        <button>GO</button>
+    </form>
+    <button onclick="onGetUserPos()" class="btn-user-pos">Go to my location</button>
+    <h2>Location: <span class="location-span"></span></h2>
+    <div id="map" style="width: 100%; height: 400px;"></div>
+    <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
 
         <p>Locations Saved:
         <pre class="locs"></pre>
