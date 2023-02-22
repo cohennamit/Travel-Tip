@@ -1,3 +1,4 @@
+import { utilService } from './util.service.js'
 export const mapService = {
     initMap,
     addMarker,
@@ -19,7 +20,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 zoom: 15
             })
             console.log('Map!', gMap)
+            utilService.setQueryStringParams(lat, lng)
         })
+     
 }
 
 function addMarker(loc) {

@@ -1,5 +1,10 @@
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
+import { utilService } from './services/util.service.js'
+
+export const controller = {
+    onCopyUrl,
+  }
 
 window.onload = onInit
 window.onAddMarker = onAddMarker
@@ -19,7 +24,7 @@ function onSearch(ev) {
 function onInit() {
     mapService.initMap()
         .then(() => {
-            console.log('Map is ready')
+            renderByQueryStringParams()
         })
         .catch(() => console.log('Error: cannot init map'))
 }
@@ -61,4 +66,26 @@ function onGetUserPos() {
 function onPanTo(lat = 35.6895, lng = 139.6917) {
     console.log('Panning the Map')
     mapService.panTo(lat, lng)
+    utilService.setQueryStringParams(lat, lng)
+}
+
+function renderByQueryStringParams() {
+    // Retrieve data from the current query-params
+    const queryStringParams = new URLSearchParams(window.location.search)
+
+    const pos = {
+        lat: +queryStringParams.get('lat') || 0,
+        lng: +queryStringParams.get('lng') || 0,
+    }
+
+    // return if no pos on the queries
+    if (!pos.lat && !pos.lng) return
+
+    console.log('Hi')
+    onPanTo(pos)
+}
+
+function onCopyUrl() {
+    const url = window.location.href
+    navigator.clipboard.writeText(url)
 }
