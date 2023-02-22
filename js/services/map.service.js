@@ -23,6 +23,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 }
 
 function addMarker(loc) {
+    console.log('loc :>> ', loc);
     var marker = new google.maps.Marker({
         position: loc,
         map: gMap,
