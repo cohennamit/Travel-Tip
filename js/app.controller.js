@@ -13,6 +13,7 @@ function onSearch(ev) {
     const elInputSearch = document.querySelector('input[name=search]').value
     console.log(elInputSearch);
     locService.getPlaceLoc(elInputSearch).then(onPanTo)
+    locService.getPlaceLoc(elInputSearch).then(onAddMarker)
 }
 
 function onInit() {
@@ -31,9 +32,9 @@ function getPosition() {
     })
 }
 
-function onAddMarker() {
+function onAddMarker({ lat = 32.0749831, lng = 34.9120554 }) {
     console.log('Adding a marker')
-    mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 })
+    mapService.addMarker({ lat, lng })
 }
 
 function onGetLocs() {
@@ -47,9 +48,9 @@ function onGetLocs() {
 function onGetUserPos() {
     getPosition()
         .then(pos => {
-            mapService.panTo(pos.coords.latitude,pos.coords.longitude)
-            mapService.addMarker({lat :pos.coords.latitude,lng: pos.coords.longitude})
-            console.log('User position is:', pos.coords.latitude,pos.coords.longitude)
+            onPanTo(pos.coords.latitude, pos.coords.longitude)
+            onAddMarker({ lat: pos.coords.latitude, lng: pos.coords.longitude })
+            console.log('User position is:', pos.coords.latitude, pos.coords.longitude)
             document.querySelector('.user-pos').innerText =
                 `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
         })
