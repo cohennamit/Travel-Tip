@@ -1,6 +1,7 @@
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
 
+let gElLocationSpan = document.querySelector('.location-span')
 window.onload = onInit
 window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
@@ -11,6 +12,7 @@ window.onSearch = onSearch
 function onSearch(ev) {
     ev.preventDefault()
     const elInputSearch = document.querySelector('input[name=search]').value
+    gElLocationSpan.innerText = elInputSearch
     console.log(elInputSearch);
     locService.getPlaceLoc(elInputSearch).then(onPanTo)
     locService.getPlaceLoc(elInputSearch).then(onAddMarker)
@@ -53,6 +55,7 @@ function onGetUserPos() {
             console.log('User position is:', pos.coords.latitude, pos.coords.longitude)
             document.querySelector('.user-pos').innerText =
                 `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
+            gElLocationSpan.innerText = 'Your current location.'
         })
         .catch(err => {
             console.log('err!!!', err)
