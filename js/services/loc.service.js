@@ -1,6 +1,7 @@
 export const locService = {
     getLocs,
-    getPlaceLoc
+    getPlaceLoc,
+    addLocation
 }
 
 
@@ -23,4 +24,7 @@ function getPlaceLoc(place) {
         .then(res => res.data.results[0].geometry.location)
 }
 
+function addLocation(location) {
+    locs.push(location)
+}
 

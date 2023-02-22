@@ -4,8 +4,9 @@ import { utilService } from './services/util.service.js'
 
 export const controller = {
     onCopyUrl,
-  }
+}
 
+let gElInputSearch
 let gElLocationSpan = document.querySelector('.location-span')
 window.onload = onInit
 window.onAddMarker = onAddMarker
@@ -16,11 +17,22 @@ window.onSearch = onSearch
 
 function onSearch(ev) {
     ev.preventDefault()
-    const elInputSearch = document.querySelector('input[name=search]').value
-    gElLocationSpan.innerText = elInputSearch
-    console.log(elInputSearch);
-    locService.getPlaceLoc(elInputSearch).then(onPanTo)
-    locService.getPlaceLoc(elInputSearch).then(onAddMarker)
+    gElInputSearch = document.querySelector('input[name=search]').value
+    gElLocationSpan.innerText = gElInputSearch
+    console.log(gElInputSearch);
+    locService.getPlaceLoc(gElInputSearch).then(onPanTo)
+    locService.getPlaceLoc(gElInputSearch).then(onAddMarker)
+    locService.getPlaceLoc(gElInputSearch).then(onCreateLoc)
+
+}
+
+function onCreateLoc(loc) {
+    let location = {
+        name: gElInputSearch,
+        lat: loc.lat,
+        lng: loc.lng
+    }
+    locService.addLocation(location)
 }
 
 function onInit() {
